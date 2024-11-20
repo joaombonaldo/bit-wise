@@ -11,7 +11,7 @@ void octalToBinary(int octal, char *binary) {
 }
 
 void displayPermissions(char *binary) {
-    char permissions[10] = "-rwxrwxrwx";  // Representação das permissões
+    char permissions[10] = "-rwxrwxrwx";
 
     for (int i = 0; i < 9; i++) {
         if (binary[i] == '0') {
@@ -26,14 +26,11 @@ int main() {
     int octal;
     char binary[10];
 
-    // Solicita ao usuário a entrada de permissões em formato octal
     printf("Digite as permissões do arquivo (formato octal, ex: 764): ");
     scanf("%d", &octal);
 
-    // Converte o número octal para binário
     octalToBinary(octal, binary);
 
-    // Exibe as permissões no formato -rwxrwxrwx
     displayPermissions(binary);
 
     return 0;
