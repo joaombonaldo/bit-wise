@@ -2,12 +2,24 @@
 #include <stdlib.h>
 
 void octalToBinary(int octal, char *binary) {
-    int i;
-    for (i = 8; i >= 0; i--) {
-        binary[i] = (octal & 1) + '0';  // Extrai o bit menos significativo
-        octal >>= 1;  // Desloca para a direita para verificar o próximo bit
+    int i = 8;
+    while (octal > 0) {
+        int digit = octal % 10; // extrai o ultimo digito octal
+        octal /= 10; // remove o ultimo numero
+
+        // converte para binario (3 bits)
+        for (int j = 2; j >= 0; j--) {
+            binary[i--] = (digit & 1) + '0';
+            digit >>= 1; // move pro proximo bit
+        }
     }
-    binary[9] = '\0';  // Adiciona o terminador de string
+
+    // completa o array de binario com zeros
+    while (i >= 0) {
+        binary[i--] = '0';
+    }
+
+    binary[9] = '\0'; // adiciona o terminador de string
 }
 
 void displayPermissions(char *binary) {
@@ -15,7 +27,7 @@ void displayPermissions(char *binary) {
 
     for (int i = 0; i < 9; i++) {
         if (binary[i] == '0') {
-            permissions[i] = '-';  // Se o bit for 0, troca a permissão para '-'
+            permissions[i + 1] = '-'; // se o bit for 0, troca a permissão para '-'
         }
     }
 
